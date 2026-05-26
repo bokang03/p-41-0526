@@ -1,22 +1,26 @@
-package com.back
+package com.think.back
 
+import com.think.back.S3Service
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import software.amazon.awssdk.services.s3.S3Client
 
 @RestController
 class HomeController(
-    private val s3Client: S3Client
+    private val s3Service: S3Service
 ) {
+
+    @Value("\${custom.secretWord}")
+    private val secretWord: String = ""
 
     @GetMapping
     fun main(): String {
-        return "Hi"
+        return "Hi, $secretWord"
     }
 
     @GetMapping("/buckets")
     fun buckets(): List<String> {
-        return s3Client.listBuckets().buckets().map { it.name() }
+        return s3Service.getBucketNames()
     }
 
 }
