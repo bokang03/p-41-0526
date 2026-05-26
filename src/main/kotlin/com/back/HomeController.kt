@@ -1,4 +1,4 @@
-package com.think.back
+package com.back
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
